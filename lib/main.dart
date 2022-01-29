@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruithero/detailsPage.dart';
+import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,9 +21,11 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
+  //Add function
+
+  //---------------
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -103,15 +106,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                         height: MediaQuery.of(context).size.height - 300.0,
                         child: ListView(children: [
-                          _buildFoodItem('assets/plate1.png', 'Salmon bowl', ''),
-                          _buildFoodItem('assets/plate2.png', 'Spring bowl', ''),
-                          _buildFoodItem('assets/plate6.png', 'Avocado bowl', ''),
+                          _buildFoodItem(
+                              'assets/plate1.png', 'Salmon bowl', ''),
+                          _buildFoodItem(
+                              'assets/plate2.png', 'Spring bowl', ''),
+                          _buildFoodItem(
+                              'assets/plate6.png', 'Avocado bowl', ''),
                           _buildFoodItem('assets/plate5.png', 'Berry bowl', '')
                         ]))),
-                    Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    
                     // Container(
                     //   height: 65.0,
                     //   width: 60.0,
@@ -164,7 +169,6 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -185,61 +189,52 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildFoodItem(String imgPath, String foodName, String price) {
     return Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-        child: InkWell(
+      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+      child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailsPage(heroTag: imgPath, foodName: foodName, foodPrice: price)
-            ));
+                builder: (context) => DetailsPage(
+                    heroTag: imgPath, foodName: foodName, foodPrice: price)));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                child: Row(
-                  children: [
-                    Hero(
-                      tag: imgPath,
-                      child: Image(
+                  child: Row(children: [
+                Hero(
+                    tag: imgPath,
+                    child: Image(
                         image: AssetImage(imgPath),
                         fit: BoxFit.cover,
                         height: 75.0,
-                        width: 75.0
-                      )
-                    ),
-                    SizedBox(width: 10.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
-                        Text(
-                          foodName,
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 17.0,
-                            fontWeight: FontWeight.bold
-                          )
-                        ),
-                        Text(
-                          price,
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0,
-                            color: Colors.grey
-                          )
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ),
+                        width: 75.0)),
+                SizedBox(width: 10.0),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(foodName,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold)),
+                  Text(price,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 15.0,
+                          color: Colors.grey))
+                ])
+              ])),
               IconButton(
-                icon: Icon(Icons.star_border),
-                color: Colors.black,
-                onPressed: () {}
-              )
+                  icon: Icon(Icons.favorite_border
+                    // isSaved ? Icons.favorite : Icons.favorite_border,
+                    // color: isSaved ? Colors.red : null,
+                  ),
+                  // onTap: () {
+                  //   savedWords.add(word)
+                  // }
+                  color: Colors.black,
+                  onPressed: () {}
+                  )
             ],
-          )
-        ),
-        );
+          )),
+    );
   }
 }
