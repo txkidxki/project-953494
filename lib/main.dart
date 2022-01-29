@@ -152,6 +152,18 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Food Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorite Menu',
+          ),
+        ],
+      ),
     );
   }
 
@@ -211,6 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           )
-        ));
+        ),
+        );
   }
 }
