@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                     width: 130.0,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         // IconButton(
                         //   icon: Icon(Icons.filter_list),
@@ -177,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.teal[400],
         onTap: _onItemTapped,
       ),
     );
