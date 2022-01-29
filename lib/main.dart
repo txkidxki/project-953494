@@ -15,11 +15,22 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  int _selectedIndex = 0;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
+                    
                     // Container(
                     //   height: 65.0,
                     //   width: 60.0,
@@ -152,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
+      
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -163,6 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Favorite Menu',
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }
