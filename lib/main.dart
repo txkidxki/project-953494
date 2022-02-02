@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruithero/detailsPage.dart';
-import 'package:english_words/english_words.dart';
+// import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //Add function
 
   //---------------
+  final _saved = Set<String>();
 
   int _selectedIndex = 0;
 
@@ -37,6 +38,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('food'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () {
+              _pushSaved();
+            },
+          ),
+        ],
+      ),
       backgroundColor: Color(0xFF21BFBD),
       body: ListView(
         children: <Widget>[
@@ -45,11 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  color: Colors.white,
-                  onPressed: () {},
-                ),
+                // IconButton(
+                //   icon: Icon(Icons.arrow_back_ios),
+                //   color: Colors.white,
+                //   onPressed: () {},
+                // ),
                 Container(
                     width: 130.0,
                     child: Row(
@@ -60,11 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         //   color: Colors.white,
                         //   onPressed: () {},
                         // ),
-                        IconButton(
-                          icon: Icon(Icons.search_rounded),
-                          color: Colors.white,
-                          onPressed: () {},
-                        )
+                        // IconButton(
+                        //   icon: Icon(Icons.search_rounded),
+                        //   color: Colors.white,
+                        //   onPressed: () {},
+                        // )
                       ],
                     ))
               ],
@@ -188,6 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildFoodItem(String imgPath, String foodName, String price) {
+    final alreadySaved = _saved.contains(foodName);
+
     return Padding(
       padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       child: InkWell(
@@ -223,18 +237,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 ])
               ])),
               IconButton(
-                  icon: Icon(Icons.favorite_border
-                    // isSaved ? Icons.favorite : Icons.favorite_border,
-                    // color: isSaved ? Colors.red : null,
-                  ),
+                  icon: Icon(
+                      alreadySaved ? Icons.favorite : Icons.favorite_border,
+                      color: alreadySaved ? Colors.red : null),
                   // onTap: () {
                   //   savedWords.add(word)
                   // }
                   color: Colors.black,
-                  onPressed: () {}
-                  )
+                  onPressed: () {
+                    setState(() {
+                      if (alreadySaved) {
+                        _saved.remove(foodName);
+                      } else {
+                        _saved.add(foodName);
+                      }
+                    });
+                  })
             ],
           )),
     );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      final tiles = _saved.map((String foodName) {
+        return ListTile(title: Text(foodName, style: TextStyle(fontSize: 16)));
+      });
+
+      final divided =
+          ListTile.divideTiles(context: context, tiles: tiles).toList();
+
+      return Scaffold(
+          appBar: AppBar(title: Text('Saved WordPairs')),
+          body: ListView(children: divided));
+    }));
   }
 }
