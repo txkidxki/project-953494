@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:fruithero/detailsPage.dart';
 import 'package:english_words/english_words.dart';
@@ -37,6 +38,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   //title: Text(widget.title),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         showSearch(
+      //           context: context,
+      //           delegate: CustomSearchDelegate(),
+      //         );
+      //       },
+      //       icon: const Icon(Icons.search),
+      //     ),
+      //   ],
+      // ),
       backgroundColor: Color(0xFF21BFBD),
       body: ListView(
         children: <Widget>[
@@ -60,13 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         //   color: Colors.white,
                         //   onPressed: () {},
                         // ),
-                        IconButton(
-                          icon: Icon(Icons.search_rounded),
-                          color: Colors.white,
-                          onPressed: () {
-                            
-                          },
-                        )
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          ),
                       ],
                     ))
               ],
@@ -237,6 +254,72 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
             ],
           )),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchTerms = [
+    'Salmon bowl',
+    'Spring bowl',
+    ];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    ); 
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var food in searchTerms) {
+      if (food.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(food);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder:  (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title:  Text(result),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions (BuildContext context) {
+    List<String> matchQuery = [];
+    for(var food in searchTerms) {
+      if(food.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(food);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index){
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result),
+        );
+      },
     );
   }
 }
