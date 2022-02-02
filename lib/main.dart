@@ -75,15 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         //   color: Colors.white,
                         //   onPressed: () {},
                         // ),
-          IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-            },
-            icon: const Icon(Icons.search),
-          ),
+                        IconButton(
+                          onPressed: () {
+                            showSearch(
+                              context: context,
+                              delegate: CustomSearchDelegate(),
+                            );
+                          },
+                          icon: const Icon(Icons.search),
+                        ),
                       ],
                     ))
               ],
@@ -243,20 +243,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ])),
               IconButton(
                   icon: Icon(Icons.favorite_border
-                    // isSaved ? Icons.favorite : Icons.favorite_border,
-                    // color: isSaved ? Colors.red : null,
-                  ),
+                      // isSaved ? Icons.favorite : Icons.favorite_border,
+                      // color: isSaved ? Colors.red : null,
+                      ),
                   // onTap: () {
                   //   savedWords.add(word)
                   // }
                   color: Colors.black,
-                  onPressed: () {}
-                  )
+                  onPressed: () {})
             ],
           )),
     );
   }
 }
+//Search function
 
 class CustomSearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
@@ -269,7 +269,11 @@ class CustomSearchDelegate extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          query = '';
+          if (query.isEmpty) {
+            close(context, null); //close searchbar
+          } else {
+            query = '';
+          }
         },
       ),
     ];
@@ -280,44 +284,35 @@ class CustomSearchDelegate extends SearchDelegate {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        close(context, null);
-      },
-    ); 
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var food in searchTerms) {
-      if (food.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(food);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder:  (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title:  Text(result),
-        );
+        close(context, null); //close searchbar
       },
     );
   }
 
   @override
-  Widget buildSuggestions (BuildContext context) {
-    List<String> matchQuery = [];
-    for(var food in searchTerms) {
-      if(food.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(food);
-      }
-    }
+  Widget buildResults(BuildContext context) => Center(
+    child: Text(
+      'You selected : '+query
+    ),
+  );
+    
+  
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+  
     return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index){
-        var result = matchQuery[index];
+      itemCount: searchTerms.length,
+      itemBuilder: (context, index) {
+        final searchTerm = searchTerms[index];
+
         return ListTile(
-          title: Text(result),
+          title: Text(searchTerm),
+          onTap: () {
+            query = searchTerm;
+
+            showResults(context);
+          },
         );
       },
     );
