@@ -40,8 +40,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('food'),
+        backgroundColor: Color(0xFF21BFBD),
+        title: Text('Food Menu',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0)),
         actions: [
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+            },
+          ),
           IconButton(
             icon: Icon(Icons.list),
             onPressed: () {
@@ -92,20 +103,20 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
-              children: <Widget>[
-                Text('Food',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0)),
-                SizedBox(width: 10.0),
-                Text('Menu',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontSize: 25.0))
-              ],
+              // children: <Widget>[
+              //   Text('Food',
+              //       style: TextStyle(
+              //           fontFamily: 'Montserrat',
+              //           color: Colors.white,
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 25.0)),
+              //   SizedBox(width: 10.0),
+              //   Text('Menu',
+              //       style: TextStyle(
+              //           fontFamily: 'Montserrat',
+              //           color: Colors.white,
+              //           fontSize: 25.0))
+              // ],
             ),
           ),
           SizedBox(height: 40.0),
@@ -187,21 +198,21 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Food Menu',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Favorite Menu',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal[400],
-        onTap: _onItemTapped,
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.menu),
+      //       label: 'Food Menu',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.favorite_border),
+      //       label: '',
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   selectedItemColor: Colors.teal[400],
+      //   onTap: _onItemTapped,
+      // ),
     );
   }
 
@@ -275,7 +286,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile.divideTiles(context: context, tiles: tiles).toList();
 
       return Scaffold(
-          appBar: AppBar(title: Text('Saved WordPairs')),
+          appBar: AppBar(
+            backgroundColor: Color(0xFF21BFBD),
+            title: Text('Favorite Menu')),
           body: ListView(children: divided));
     }));
   }
