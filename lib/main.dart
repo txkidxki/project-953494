@@ -42,22 +42,30 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Color(0xFF21BFBD),
         title: Text('Food Menu',
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0)),
+            style: TextStyle(
+                fontFamily: 'Montserrat',
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0)),
         actions: [
           IconButton(
             icon: Icon(Icons.home),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.list),
             onPressed: () {
               _pushSaved();
             },
+          ),
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+            },
+            icon: const Icon(Icons.search),
           ),
         ],
       ),
@@ -85,15 +93,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         //   onPressed: () {},
                         // ),
 
-                        IconButton(
-                          onPressed: () {
-                            showSearch(
-                              context: context,
-                              delegate: CustomSearchDelegate(),
-                            );
-                          },
-                          icon: const Icon(Icons.search),
-                        ),
+                        // IconButton(
+                        //   onPressed: () {
+                        //     showSearch(
+                        //       context: context,
+                        //       delegate: CustomSearchDelegate(),
+                        //     );
+                        //   },
+                        //   icon: const Icon(Icons.search),
+                        // ),
                       ],
                     ))
               ],
@@ -103,21 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
-              // children: <Widget>[
-              //   Text('Food',
-              //       style: TextStyle(
-              //           fontFamily: 'Montserrat',
-              //           color: Colors.white,
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 25.0)),
-              //   SizedBox(width: 10.0),
-              //   Text('Menu',
-              //       style: TextStyle(
-              //           fontFamily: 'Montserrat',
-              //           color: Colors.white,
-              //           fontSize: 25.0))
-              // ],
-            ),
+                // children: <Widget>[
+                //   Text('Food',
+                //       style: TextStyle(
+                //           fontFamily: 'Montserrat',
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 25.0)),
+                //   SizedBox(width: 10.0),
+                //   Text('Menu',
+                //       style: TextStyle(
+                //           fontFamily: 'Montserrat',
+                //           color: Colors.white,
+                //           fontSize: 25.0))
+                // ],
+                ),
           ),
           SizedBox(height: 40.0),
           Container(
@@ -287,8 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       return Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFF21BFBD),
-            title: Text('Favorite Menu')),
+              backgroundColor: Color(0xFF21BFBD), title: Text('Favorite Menu')),
           body: ListView(children: divided));
     }));
   }
