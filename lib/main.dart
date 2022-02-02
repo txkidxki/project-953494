@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruithero/detailsPage.dart';
 import 'package:english_words/english_words.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -117,51 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    // Container(
-                    //   height: 65.0,
-                    //   width: 60.0,
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: Colors.grey,
-                    //         style: BorderStyle.solid,
-                    //         width: 1.0),
-                    //     borderRadius: BorderRadius.circular(10.0),
-                    //   ),
-                    //   child: Center(
-                    //     child: Icon(Icons.search, color: Colors.black),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 65.0,
-                    //   width: 60.0,
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: Colors.grey,
-                    //         style: BorderStyle.solid,
-                    //         width: 1.0),
-                    //     borderRadius: BorderRadius.circular(10.0),
-                    //   ),
-                    //   child: Center(
-                    //     child: Icon(Icons.shopping_basket, color: Colors.black),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 65.0,
-                    //   width: 120.0,
-                    //   decoration: BoxDecoration(
-                    //       border: Border.all(
-                    //           color: Colors.grey,
-                    //           style: BorderStyle.solid,
-                    //           width: 1.0),
-                    //       borderRadius: BorderRadius.circular(10.0),
-                    //       color: Color(0xFF1C1428)),
-                    //   child: Center(
-                    //       child: Text('Checkout',
-                    //           style: TextStyle(
-                    //               fontFamily: 'Montserrat',
-                    //               color: Colors.white,
-                    //               fontSize: 15.0))),
-                    // )
                   ],
                 )
               ],
@@ -220,19 +176,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontFamily: 'Montserrat',
                           fontSize: 15.0,
                           color: Colors.grey))
-                ])
+                ])               
               ])),
-              IconButton(
-                  icon: Icon(Icons.favorite_border
-                    // isSaved ? Icons.favorite : Icons.favorite_border,
-                    // color: isSaved ? Colors.red : null,
-                  ),
-                  // onTap: () {
-                  //   savedWords.add(word)
-                  // }
-                  color: Colors.black,
-                  onPressed: () {}
-                  )
+               FavoriteButton(
+                isFavorite: false,
+                // iconDisabledColor: Colors.white,
+                valueChanged: (_isFavorite) {
+                  print('Is Favorite : $_isFavorite');
+                },
+              )
             ],
           )),
     );
