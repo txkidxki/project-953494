@@ -2,10 +2,6 @@
 
 Code for a simple ui screen created with flutter.
 
-Design credit - https://dribbble.com/shots/6687016-Foody-Food-by-Subscription
-
-How do I code this - https://youtu.be/K1uH_SN4X0w
-
 ## Screenshots
 
 ![Screenshot_20190801-030839](https://user-images.githubusercontent.com/8137504/62318844-51c08900-b4ba-11e9-9aca-85b9641234ee.png)
